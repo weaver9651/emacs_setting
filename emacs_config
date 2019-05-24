@@ -1,0 +1,47 @@
+;; line number
+(global-linum-mode 1)
+
+;; time
+(display-time)
+
+;; parenthesis
+(show-paren-mode 1)
+
+;; redo
+(setq load-path (cons (expand-file-name "~/.emacs.d/lisp") load-path))
+(require 'redo+)
+(global-set-key (kbd "M-/") 'redo)
+(setq undo-no-redo t)
+
+;; cscope
+(setq load-path (cons (expand-file-name "~/.emacs.d/lisp") load-path))
+(require 'xcscope)
+(cscope-setup)
+(setq cscope-option-do-not-update-database t)
+
+;; hotkey
+(global-set-key [f5] 'previous-buffer)
+(global-set-key [f6] 'next-buffer)
+(global-set-key [f10] 'gud-next)
+(global-set-key [f11] 'gud-step)
+
+;; Toggle window dedication
+(defun toggle-window-dedicated ()
+  "Toggle whether the current active window is dedicated or not"
+  (interactive)
+  (message
+   (if (let (window (get-buffer-window (current-buffer)))
+	 (set-window-dedicated-p window
+				 (not (window-dedicated-p window))))
+       "Window '%s' is dedicated"
+     "Window '%s' is normal")
+   (current-buffer)))
+
+;; reverse window
+;; Since "ctrl + shift" command cannot be used in emacs, following commands like "C->" should be changed.
+(defun other-window-reverse ()
+  (interactive)
+  (other-window -1))
+
+(global-set-key (kbd "C->") 'other-window)
+(global-set-key (kbd "C-<") 'other-window-reverse)
