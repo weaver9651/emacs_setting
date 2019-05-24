@@ -1,0 +1,153 @@
+;; set el files load path
+(setq load-path (cons (expand-file-name "~/.emacs.d/lisp") load-path))
+
+;; line number
+;; (global-linum-mode 1)
+
+;; time
+(display-time)
+
+;; parenthesis
+(show-paren-mode 1)
+
+;; show a menu only when running within X (save real estate when in console)
+(menu-bar-mode (if window-system 1 -1))
+
+;; show buffer list in current window
+(global-set-key (kbd "C-x C-b") 'buffer-menu)
+
+;; various mode
+(require 'llvm-mode)
+
+;; gud-gdb
+(global-set-key [f5] 'gud-continue)
+(global-set-key [f10] 'gud-next)
+(global-set-key [f11] 'gud-step)
+
+;; redo
+(setq load-path (cons (expand-file-name "~/.emacs.d/lisp") load-path))
+(require 'redo+)
+(global-set-key (kbd "C-x u") 'redo)
+(setq undo-no-redo t)
+
+;; Toggle window dedication
+(defun toggle-window-dedicated ()
+  "Toggle whether the current active window is dedicated or not"
+  (interactive)
+  (message
+   (if (let (window (get-buffer-window (current-buffer)))
+	 (set-window-dedicated-p window
+				 (not (window-dedicated-p window))))
+       "Window '%s' is dedicated"
+     "Window '%s' is normal")
+   (current-buffer)))
+
+;; reverse window
+(defun other-window-reverse ()
+  (interactive)
+  (other-window -1))
+
+(global-set-key (kbd "C-x .") 'other-window)
+(global-set-key (kbd "C-x ,") 'other-window-reverse)
+
+;; cscope
+(setq load-path (cons (expand-file-name "~/.emacs.d/lisp") load-path))
+(require 'xcscope)
+(cscope-setup)
+(setq cscope-option-do-not-update-database t)
+
+;; neotree
+(add-to-list 'load-path "~/.emacs.d/lisp/")
+(require 'neotree)
+(global-set-key [f8] 'neotree-toggle)
+
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(diff-added ((t (:foreground "green"))))
+ '(diff-context ((t (:weight bold))))
+ '(diff-file-header ((t (:background "black" :weight bold))))
+ '(diff-header ((t (:background "black"))))
+ '(diff-hunk-header ((t (:foreground "cyan"))))
+ '(diff-indicator-added ((t (:foreground "green"))))
+ '(diff-indicator-removed ((t (:foreground "red"))))
+ '(diff-removed ((t (:foreground "red"))))
+ '(magit-diff-added-highlight ((t (:foreground "green"))))
+ '(magit-diff-context-highlight ((t (:foreground "grey50"))))
+ '(magit-diff-removed-highlight ((t (:foreground "red"))))
+ '(magit-section-highlight ((t (:background "blue" :foreground "black"))))
+ '(neo-file-link-face ((t (:foreground "white"))))
+ '(neo-vc-default-face ((t (:foreground "#e5e5e5")))))
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages '(dockerfile-mode ein elpy use-package magit)))
+
+;; pakcage management
+(require 'package)
+(add-to-list 'package-archives
+	     '("marmalade" . "http://marmalade-repo.org/packages/") t)
+;; (add-to-list 'package-archives
+;;              '("melpa-stable" . "http://stable.melpa.org/packages/") t)
+(add-to-list 'package-archives
+             '("melpa-unstable" . "http://melpa.org/packages/") t)
+(package-initialize)
+
+
+;; magit shortcut
+(global-set-key (kbd "C-x g") 'magit-status)
+
+;; meghanada
+;; (require 'meghanada)
+;; (add-hook 'java-mode-hook
+;;           (lambda ()
+;;             ;; meghanada-mode on
+;;             (meghanada-mode t)
+;;             (flycheck-mode +1)
+;;             (setq c-basic-offset 2)
+;;             ;; use code format
+;;             (add-hook 'before-save-hook 'meghanada-code-beautify-before-save)))
+;; (cond
+;;    ((eq system-type 'windows-nt)
+;;     (setq meghanada-java-path (expand-file-name "bin/java.exe" (getenv "JAVA_HOME")))
+;;     (setq meghanada-maven-path "mvn.cmd"))
+;;    (t
+;;     (setq meghanada-java-path "java")
+;;     (setq meghanada-maven-path "mvn")))
+
+;; yaml-mode
+(require 'yaml-mode)
+(add-to-list 'auto-mode-alist '("\\.ya?ml\\'" . yaml-mode))
+
+
+;; ETC
+;; buffer-navigation, find-file extension
+(ido-mode t)
+;; emacs shell mode. previously f8, but now neotree.
+(global-set-key [f1] 'shell)
+;; show column (row, column) numbers
+(column-number-mode 1)
+
+
+;; python3
+(use-package elpy
+  :ensure t
+  :config
+  (elpy-enable)
+  (setq elpy-rpc-python-command "python3")
+  (setq elpy-rpc-backend "jedi")
+  (or (executable-find "python3")
+   (executable-find "/usr/bin/python3")
+   (executable-find "/usr/local/bin/python3")
+   "python3")
+  ;; (elpy-use-ipython)
+  (setq python-shell-interpreter-args "--simple-prompt -i")
+  (add-hook 'python-mode-hook (lambda ()
+                              (setq indent-tabs-mode nil))))
+ 
+(use-package ein
+  :ensure t)
