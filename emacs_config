@@ -45,3 +45,7 @@
 
 (global-set-key (kbd "C->") 'other-window)
 (global-set-key (kbd "C-<") 'other-window-reverse)
+
+(add-to-list 'load-path "~/.emacs.d/lisp/")
+(require 'neotree)
+(global-set-key [f8] 'neotree-toggle)
