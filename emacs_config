@@ -11,6 +11,7 @@
 (menu-bar-mode (if window-system 1 -1))
 
 ;; gud-gdb
+(global-set-key [f5] 'gud-continue)
 (global-set-key [f10] 'gud-next)
 (global-set-key [f11] 'gud-step)
 
