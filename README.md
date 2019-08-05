@@ -7,5 +7,5 @@
 - window dedication
 - reverse window
 - VisualStudio-like debugging key setting
- -- f10 : next
- -- f11 : step
+  - f10 : next
+  - f11 : step
