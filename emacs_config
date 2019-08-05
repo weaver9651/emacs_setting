@@ -10,23 +10,15 @@
 ;; show a menu only when running within X (save real estate when in console)
 (menu-bar-mode (if window-system 1 -1))
 
+;; gud-gdb
+(global-set-key [f10] 'gud-next)
+(global-set-key [f11] 'gud-step)
+
 ;; redo
 (setq load-path (cons (expand-file-name "~/.emacs.d/lisp") load-path))
 (require 'redo+)
 (global-set-key (kbd "M-/") 'redo)
 (setq undo-no-redo t)
-
-;; cscope
-(setq load-path (cons (expand-file-name "~/.emacs.d/lisp") load-path))
-(require 'xcscope)
-(cscope-setup)
-(setq cscope-option-do-not-update-database t)
-
-;; hotkey
-(global-set-key [f5] 'previous-buffer)
-(global-set-key [f6] 'next-buffer)
-(global-set-key [f10] 'gud-next)
-(global-set-key [f11] 'gud-step)
 
 ;; Toggle window dedication
 (defun toggle-window-dedicated ()
@@ -41,17 +33,24 @@
    (current-buffer)))
 
 ;; reverse window
-;; Since "ctrl + shift" command cannot be used in emacs, following commands like "C->" should be changed.
 (defun other-window-reverse ()
   (interactive)
   (other-window -1))
 
-(global-set-key (kbd "C->") 'other-window)
-(global-set-key (kbd "C-<") 'other-window-reverse)
+(global-set-key (kbd "C-x .") 'other-window)
+(global-set-key (kbd "C-x ,") 'other-window-reverse)
 
+;; cscope
+(setq load-path (cons (expand-file-name "~/.emacs.d/lisp") load-path))
+(require 'xcscope)
+(cscope-setup)
+(setq cscope-option-do-not-update-database t)
+
+;; neotree
 (add-to-list 'load-path "~/.emacs.d/lisp/")
 (require 'neotree)
 (global-set-key [f8] 'neotree-toggle)
+(custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
@@ -65,3 +64,10 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+
+(require 'package)
+(add-to-list 'package-archives
+	     '("marmalade" . "http://marmalade-repo.org/packages/") t)
+;; (add-to-list 'package-archives
+;;           '("melpa-stable" . "http://stable.melpa.org/packages/") t)
+(package-initialize)
