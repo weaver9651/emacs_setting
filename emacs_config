@@ -10,6 +10,9 @@
 ;; show a menu only when running within X (save real estate when in console)
 (menu-bar-mode (if window-system 1 -1))
 
+;; various mode
+(require 'llvm-mode)
+
 ;; gud-gdb
 (global-set-key [f5] 'gud-continue)
 (global-set-key [f10] 'gud-next)
