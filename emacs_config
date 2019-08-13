@@ -1,3 +1,6 @@
+;; set el files load path
+(setq load-path (cons (expand-file-name "~/.emacs.d/lisp") load-path))
+
 ;; line number
 (global-linum-mode 1)
 
