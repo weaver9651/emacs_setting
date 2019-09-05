@@ -78,3 +78,6 @@
 ;; (add-to-list 'package-archives
 ;;           '("melpa-stable" . "http://stable.melpa.org/packages/") t)
 (package-initialize)
+
+;; ETC
+(ido-mode t) ;; buffer-navigation, find-file extension
