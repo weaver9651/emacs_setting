@@ -80,4 +80,7 @@
 (package-initialize)
 
 ;; ETC
-(ido-mode t) ;; buffer-navigation, find-file extension
+;; buffer-navigation, find-file extension
+(ido-mode t)
+;; emacs shell mode. previously f8, but now neotree.
+(global-set-key [f1] 'shell)
