@@ -2,7 +2,7 @@
 (setq load-path (cons (expand-file-name "~/.emacs.d/lisp") load-path))
 
 ;; line number
-(global-linum-mode 1)
+;; (global-linum-mode 1)
 
 ;; time
 (display-time)
