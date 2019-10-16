@@ -84,3 +84,5 @@
 (ido-mode t)
 ;; emacs shell mode. previously f8, but now neotree.
 (global-set-key [f1] 'shell)
+;; show column (row, column) numbers
+(column-number-mode 1)
