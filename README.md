@@ -1,5 +1,6 @@
 # emacs_setting
 ## Included features
+- llvm-mode
 - neo-tree
 - xcscope
 - redo
