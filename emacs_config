@@ -79,6 +79,9 @@
 ;;           '("melpa-stable" . "http://stable.melpa.org/packages/") t)
 (package-initialize)
 
+;; magit shortcut
+(global-set-key (kbd "C-x g") 'magit-status)
+
 ;; ETC
 ;; buffer-navigation, find-file extension
 (ido-mode t)
