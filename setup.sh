@@ -30,4 +30,7 @@ if [ -f $HOME/.emacs ]; then
 else
     echo "'.emacs' does not exist."
     cp ./emacs_config $HOME/.emacs
+    echo "cp .emacs ~/.emacs"
 fi
+
+echo "To install magit, choose package link in .eamcs file then\n M-x package-refresh-contents RET\n M-x package-install RET magit RET"
