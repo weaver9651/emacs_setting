@@ -1,6 +1,8 @@
 # emacs_setting
 ## Included features
-- llvm-mode
+- lint
+  - llvm-mode
+  - yaml-mode
 - neo-tree
   - f8
 - xcscope
