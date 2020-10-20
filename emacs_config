@@ -71,6 +71,9 @@
  '(diff-indicator-added ((t (:foreground "green"))))
  '(diff-indicator-removed ((t (:foreground "red"))))
  '(diff-removed ((t (:foreground "red"))))
+ '(magit-diff-added-highlight ((t (:foreground "green"))))
+ '(magit-diff-context-highlight ((t (:foreground "grey50"))))
+ '(magit-diff-removed-highlight ((t (:foreground "red"))))
  '(magit-section-highlight ((t (:background "blue" :foreground "black"))))
  '(neo-file-link-face ((t (:foreground "white"))))
  '(neo-vc-default-face ((t (:foreground "#e5e5e5")))))
@@ -112,6 +115,7 @@
 ;; yaml-mode
 (require 'yaml-mode)
 (add-to-list 'auto-mode-alist '("\\.ya?ml\\'" . yaml-mode))
+
 
 ;; ETC
 ;; buffer-navigation, find-file extension
