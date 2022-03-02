@@ -33,5 +33,6 @@ else
     echo "cp .emacs ~/.emacs"
 fi
 
-echo "To install magit, choose package link in .eamcs file then\n M-x package-refresh-contents RET\n M-x package-install RET magit RET\n"
-echo "To install meghanada, set melpa then M-x package-refresh-contents RET\n M-x package-install RET meghanada RET\n"
+echo -e "To install magit, choose package link in .eamcs file then\n M-x package-refresh-contents RET\n M-x package-install RET magit RET\n"
+echo -e "To install meghanada, set melpa then M-x package-refresh-contents RET\n M-x package-install RET meghanada RET\n"
+echo -e "installing use-package which is a pakcage manage tool will install packages automatically"
