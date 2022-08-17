@@ -152,3 +152,6 @@
 (use-package ein
   :ensure t)
 
+;; unset key bindings
+(global-unset-key (kbd "C-x C-l"))
+(global-unset-key (kbd "C-x C-n"))
