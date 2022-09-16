@@ -74,10 +74,12 @@
  '(diff-indicator-added ((t (:foreground "green"))))
  '(diff-indicator-removed ((t (:foreground "red"))))
  '(diff-removed ((t (:foreground "red"))))
+ '(font-lock-function-name-face ((t (:foreground "blue"))))
  '(magit-diff-added-highlight ((t (:foreground "green"))))
  '(magit-diff-context-highlight ((t (:foreground "grey50"))))
  '(magit-diff-removed-highlight ((t (:foreground "red"))))
  '(magit-section-highlight ((t (:background "blue" :foreground "black"))))
+ '(minibuffer-prompt ((t (:foreground "blue"))))
  '(neo-file-link-face ((t (:foreground "white"))))
  '(neo-vc-default-face ((t (:foreground "#e5e5e5")))))
 (custom-set-variables
@@ -85,7 +87,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(package-selected-packages '(dockerfile-mode ein elpy use-package magit)))
+ '(package-selected-packages (quote (dockerfile-mode ein elpy use-package magit))))
 
 ;; pakcage management
 (require 'package)
@@ -134,23 +136,23 @@
 
 
 ;; python3
-(use-package elpy
-  :ensure t
-  :config
-  (elpy-enable)
-  (setq elpy-rpc-python-command "python3")
-  (setq elpy-rpc-backend "jedi")
-  (or (executable-find "python3")
-   (executable-find "/usr/bin/python3")
-   (executable-find "/usr/local/bin/python3")
-   "python3")
-  ;; (elpy-use-ipython)
-  (setq python-shell-interpreter-args "--simple-prompt -i")
-  (add-hook 'python-mode-hook (lambda ()
-                              (setq indent-tabs-mode nil))))
+;; (use-package elpy
+;;   :ensure t
+;;   :config
+;;   (elpy-enable)
+;;   (setq elpy-rpc-python-command "python3")
+;;   (setq elpy-rpc-backend "jedi")
+;;   (or (executable-find "python3")
+;;    (executable-find "/usr/bin/python3")
+;;    (executable-find "/usr/local/bin/python3")
+;;    "python3")
+;;   ;; (elpy-use-ipython)
+;;   (setq python-shell-interpreter-args "--simple-prompt -i")
+;;   (add-hook 'python-mode-hook (lambda ()
+;;                               (setq indent-tabs-mode nil))))
  
-(use-package ein
-  :ensure t)
+;; (use-package ein
+;;   :ensure t)
 
 ;; unset key bindings
 (global-unset-key (kbd "C-x C-l"))
