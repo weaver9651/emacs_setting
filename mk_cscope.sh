@@ -1,6 +1,6 @@
 #!/bin/bash
 
-PROJ_DIR=/home/gykim/work/lee
+PROJ_DIR=`pwd`
 SRC_DIR=$PROJ_DIR/
 
 # Directory where the source files are located
@@ -12,5 +12,5 @@ DEST_DIR=$PROJ_DIR
 
 cd $DEST_DIR
 rm -rf cscope.out cscope.files
-find $SEARCH_DIR  \( -name '*.c' -o -name '*.h' -o -name '*.cpp' \) -print > cscope.files
+find $SEARCH_DIR  \( -name '*.c' -o -name '*.h' -o -name '*.cpp' -o -name '*.hpp' \) -print > cscope.files
 cscope -b
