@@ -66,6 +66,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(custom-face-tag ((t (:inherit custom-variable-tag :foreground "black"))))
  '(diff-added ((t (:foreground "green"))))
  '(diff-context ((t (:weight bold))))
  '(diff-file-header ((t (:background "black" :weight bold))))
@@ -75,11 +76,13 @@
  '(diff-indicator-removed ((t (:foreground "red"))))
  '(diff-removed ((t (:foreground "red"))))
  '(font-lock-function-name-face ((t (:foreground "blue"))))
+ '(highlight-indentation-face ((t (:inherit fringe :background "brightblack"))))
  '(magit-diff-added-highlight ((t (:foreground "green"))))
  '(magit-diff-context-highlight ((t (:foreground "grey50"))))
  '(magit-diff-removed-highlight ((t (:foreground "red"))))
  '(magit-section-highlight ((t (:background "blue" :foreground "black"))))
  '(minibuffer-prompt ((t (:foreground "blue"))))
+ '(neo-dir-link-face ((t (:foreground "blue"))))
  '(neo-file-link-face ((t (:foreground "white"))))
  '(neo-vc-default-face ((t (:foreground "#e5e5e5")))))
 (custom-set-variables
@@ -91,8 +94,8 @@
 
 ;; pakcage management
 (require 'package)
-(add-to-list 'package-archives
-	     '("marmalade" . "http://marmalade-repo.org/packages/") t)
+;; (add-to-list 'package-archives
+;; 	     '("marmalade" . "http://marmalade-repo.org/packages/") t)
 ;; (add-to-list 'package-archives
 ;;              '("melpa-stable" . "http://stable.melpa.org/packages/") t)
 (add-to-list 'package-archives
@@ -102,24 +105,6 @@
 
 ;; magit shortcut
 (global-set-key (kbd "C-x g") 'magit-status)
-
-;; meghanada
-;; (require 'meghanada)
-;; (add-hook 'java-mode-hook
-;;           (lambda ()
-;;             ;; meghanada-mode on
-;;             (meghanada-mode t)
-;;             (flycheck-mode +1)
-;;             (setq c-basic-offset 2)
-;;             ;; use code format
-;;             (add-hook 'before-save-hook 'meghanada-code-beautify-before-save)))
-;; (cond
-;;    ((eq system-type 'windows-nt)
-;;     (setq meghanada-java-path (expand-file-name "bin/java.exe" (getenv "JAVA_HOME")))
-;;     (setq meghanada-maven-path "mvn.cmd"))
-;;    (t
-;;     (setq meghanada-java-path "java")
-;;     (setq meghanada-maven-path "mvn")))
 
 ;; yaml-mode
 (require 'yaml-mode)
@@ -136,23 +121,28 @@
 
 
 ;; python3
-;; (use-package elpy
-;;   :ensure t
-;;   :config
-;;   (elpy-enable)
-;;   (setq elpy-rpc-python-command "python3")
-;;   (setq elpy-rpc-backend "jedi")
-;;   (or (executable-find "python3")
-;;    (executable-find "/usr/bin/python3")
-;;    (executable-find "/usr/local/bin/python3")
-;;    "python3")
-;;   ;; (elpy-use-ipython)
-;;   (setq python-shell-interpreter-args "--simple-prompt -i")
-;;   (add-hook 'python-mode-hook (lambda ()
-;;                               (setq indent-tabs-mode nil))))
+(use-package elpy
+  :ensure t
+  :config
+  (elpy-enable)
+  (setq elpy-rpc-python-command "python3")
+  (setq elpy-rpc-backend "jedi")
+  (or (executable-find "python3")
+   (executable-find "/usr/bin/python3")
+   (executable-find "/usr/local/bin/python3")
+   "python3")
+  ;; (setq python-shell-interpreter "ipython")
+  ;; (setq python-shell-interpreter-args "--simple-prompt -i")
+  (setq python-shell-interpreter "jupyter"
+	python-shell-interpreter-args "console --simple-prompt"
+	python-shell-prompt-detect-failure-warning nil)
+  (add-to-list 'python-shell-completion-native-disabled-interpreters
+	       "jupyter")
+  (add-hook 'python-mode-hook (lambda ()
+				(setq indent-tabs-mode nil))))
  
-;; (use-package ein
-;;   :ensure t)
+(use-package ein
+  :ensure t)
 
 ;; unset key bindings
 (global-unset-key (kbd "C-x C-l"))
