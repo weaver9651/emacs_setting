@@ -33,4 +33,5 @@ else
     echo "cp .emacs ~/.emacs"
 fi
 
-echo -e "Install use-package"
+echo -e "After package-refresh, Install use-package"
+echo -e "Install python3-venv to prevent elpy errors"
