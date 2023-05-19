@@ -90,7 +90,9 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(package-selected-packages (quote (dockerfile-mode ein elpy use-package magit))))
+ '(package-selected-packages
+   (quote
+    (ros list-packages-ext arduino-mode launch-mode dockerfile-mode ein elpy use-package magit))))
 
 ;; pakcage management
 (require 'package)
@@ -134,10 +136,10 @@
   ;; (setq python-shell-interpreter "ipython")
   ;; (setq python-shell-interpreter-args "--simple-prompt -i")
   (setq python-shell-interpreter "jupyter"
-	python-shell-interpreter-args "console --simple-prompt"
-	python-shell-prompt-detect-failure-warning nil)
+  	python-shell-interpreter-args "console --simple-prompt"
+  	python-shell-prompt-detect-failure-warning nil)
   (add-to-list 'python-shell-completion-native-disabled-interpreters
-	       "jupyter")
+  	       "jupyter")
   (add-hook 'python-mode-hook (lambda ()
 				(setq indent-tabs-mode nil))))
  
@@ -147,3 +149,25 @@
 ;; unset key bindings
 (global-unset-key (kbd "C-x C-l"))
 (global-unset-key (kbd "C-x C-n"))
+
+;; company mode
+(require 'company)
+(add-hook 'after-init-hook 'global-company-mode)
+
+(with-eval-after-load 'company
+  (define-key company-active-map (kbd "M-/") #'company-complete))
+
+(with-eval-after-load 'company
+  (define-key company-active-map
+              (kbd "TAB")
+              #'company-complete-common-or-cycle)
+  (define-key company-active-map
+              (kbd "<backtab>")
+              (lambda ()
+                (interactive)
+                (company-complete-common-or-cycle -1))))
+
+(with-eval-after-load 'company
+  (define-key company-active-map (kbd "M-.") #'company-show-location)
+  ;; (define-key company-active-map (kbd "RET") nil)
+)
