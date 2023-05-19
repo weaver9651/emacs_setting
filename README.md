@@ -1,18 +1,23 @@
 # emacs_setting
 ## Included features
+- appearance
+  - hide menu bar
+  - window dedication
 - lint
   - llvm-mode
   - yaml-mode
 - neo-tree
   - f8
-- xcscope
-- redo
-- hide menu bar
-- window dedication
-- reverse window
-- marmalate and melpa package link
-- magit(manually install)
-- VisualStudio-like debugging key setting
-  - f5 : continue
-  - f10 : next
-  - f11 : step
+- coding
+  - xcscope
+  - magit (manually install)
+  - elpy (Python auto completion)
+  - company mode (C++ auto completion)
+  - VisualStudio-like debugging key setting
+    - f5 : continue
+    - f10 : next
+    - f11 : step
+- extended basic features
+  - redo
+  - reverse window
+- marmalade and melpa package link
