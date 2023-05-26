@@ -112,6 +112,8 @@
 (require 'yaml-mode)
 (add-to-list 'auto-mode-alist '("\\.ya?ml\\'" . yaml-mode))
 
+;; rainbow-delimiters mode
+(add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
 
 ;; ETC
 ;; buffer-navigation, find-file extension
