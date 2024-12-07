@@ -21,3 +21,6 @@
   - redo
   - reverse window
 - marmalade and melpa package link
+
+### gnupg key error
+https://emacs.stackexchange.com/questions/60554/cannot-run-melpa-package-refresh-due-to-gpg-errors

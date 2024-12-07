@@ -92,16 +92,16 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (ros list-packages-ext arduino-mode launch-mode dockerfile-mode ein elpy use-package magit))))
+    (ros list-packages-ext arduino-mode launch-mode dockerfile-mode elpy use-package magit))))
 
 ;; pakcage management
 (require 'package)
 ;; (add-to-list 'package-archives
 ;; 	     '("marmalade" . "http://marmalade-repo.org/packages/") t)
-;; (add-to-list 'package-archives
-;;              '("melpa-stable" . "http://stable.melpa.org/packages/") t)
 (add-to-list 'package-archives
-             '("melpa-unstable" . "http://melpa.org/packages/") t)
+             '("melpa-stable" . "http://stable.melpa.org/packages/") t)
+;; (add-to-list 'package-archives
+;;              '("melpa-unstable" . "http://melpa.org/packages/") t)
 (package-initialize)
 
 
@@ -144,9 +144,6 @@
   	       "jupyter")
   (add-hook 'python-mode-hook (lambda ()
 				(setq indent-tabs-mode nil))))
- 
-(use-package ein
-  :ensure t)
 
 ;; unset key bindings
 (global-unset-key (kbd "C-x C-l"))
