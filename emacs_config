@@ -205,6 +205,7 @@
 ;;;; ETC
 
 ;; buffer-navigation, find-file extension
+;; install counsel
 (ivy-mode t)
 
 ;; emacs shell mode. previously f8, but now neotree.
