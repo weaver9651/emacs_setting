@@ -69,10 +69,6 @@
  '(neo-vc-default-face ((t (:foreground "#e5e5e5"))))
  '(tuareg-font-lock-interactive-output-face ((t (:foreground "cyan")))))
 
-;; ein?
-(use-package ein
-  :ensure t)
-
 ;; pakcage management
 (require 'package)
 ;; (add-to-list 'package-archives
@@ -253,4 +249,4 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(counsel projectile magit tabspaces use-package tuareg rainbow-delimiters ocamlformat lsp-mode jedi elpygen elpy ein company-jedi)))
+   '(counsel projectile magit tabspaces use-package tuareg rainbow-delimiters ocamlformat lsp-mode jedi elpygen elpy company-jedi)))
