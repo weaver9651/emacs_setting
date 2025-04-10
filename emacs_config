@@ -1,5 +1,5 @@
 ;; set el files load path
-(setq load-path (cons (expand-file-name "~/.emacs.d/lisp") load-path))
+(setq load-path (cons (expand-file-name "/home/vagrant/.emacs.d/lisp") load-path))
 
 ;; various mode
 (require 'llvm-mode)
@@ -83,34 +83,33 @@
 ;; magit shortcut
 (global-set-key (kbd "C-x g") 'magit-status)
 
-;; yaml-mode
-(require 'yaml-mode)
-(add-to-list 'auto-mode-alist '("\\.ya?ml\\'" . yaml-mode))
-
 ;; rainbow-delimiters mode
 (add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
 
-;; python3
-(use-package elpy
-  :ensure t
+
+;;;; treesitter, eglot, and corfu
+;; treesitter
+(use-package treesit
+  :ensure nil
+  :when (treesit-available-p)
+  :init
+  (setq major-mode-remap-alist
+	'((python-mode . python-ts-mode)
+	  (yaml-mode . yaml-ts-mode)
+	  (ocaml-mode . ocaml-ts-mode))))
+
+(use-package treesit-auto
   :config
-  (elpy-enable)
-  (setq elpy-rpc-python-command "python3")
-  (setq elpy-rpc-backend "jedi")
-  (or (executable-find "python3")
-   (executable-find "/usr/bin/python3")
-   (executable-find "/usr/local/bin/python3")
-   "python3")
-  ;; (setq python-shell-interpreter "ipython")
-  ;; (setq python-shell-interpreter-args "--simple-prompt -i")
-  (setq python-shell-interpreter "jupyter"
-  	python-shell-interpreter-args "console --simple-prompt"
-  	python-shell-prompt-detect-failure-warning nil)
-  (add-to-list 'python-shell-completion-native-disabled-interpreters
-  	       "jupyter")
-  (add-hook 'python-mode-hook (lambda ()
-				(setq indent-tabs-mode nil))))
- 
+  (global-tree-sitter-mode))
+
+;; eglot
+(add-hook 'prog-mode-hook 'eglot-ensure)
+
+;; auto completion using tab even before the function list window pops up
+;; (global-corfu-mode)
+;; (setq tab-always-indent 'complete)
+
+
 ;; unset key bindings
 (global-unset-key (kbd "C-x C-l"))
 (global-unset-key (kbd "C-x C-n"))
@@ -118,11 +117,11 @@
 ;;;; ocaml
 
 ;; ocp-indent
-(add-to-list 'load-path "~/.opam/default/share/emacs/site-lisp")
-(require 'ocp-indent)
+;; (add-to-list 'load-path "~/.opam/default/share/emacs/site-lisp")
+;; (require 'ocp-indent)
 
 ;; tuareg
-(load "~/.opam/default/share/emacs/site-lisp/tuareg-site-file")
+;; (load "~/.opam/default/share/emacs/site-lisp/tuareg-site-file")
 (use-package tuareg
   :ensure t
   :hook (tuareg-mode . lsp-deferred))
@@ -185,7 +184,7 @@
 (global-set-key (kbd "M-W") 'tab-bar-close-tab)
 
 ;; company-mode
-(add-hook 'after-init-hook 'global-company-mode)
+;; (add-hook 'after-init-hook 'global-company-mode)
 
 ;; projectile
 (use-package projectile
@@ -199,10 +198,10 @@
 (setq projectile-completion-system 'ivy)
 
 ;;;; ETC
+;; ivy-mode
+(ivy-mode t)
 
 ;; buffer-navigation, find-file extension
-;; install counsel
-(ivy-mode t)
 
 ;; emacs shell mode. previously f8, but now neotree.
 (global-set-key [f1] 'shell)
@@ -241,12 +240,3 @@
 (global-set-key (kbd "C-x C-b") 'ivy-switch-buffer)
 
 ;;;;
-
-;; DO NOT TOUCH BELOW HERE
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages
-   '(counsel projectile magit tabspaces use-package tuareg rainbow-delimiters ocamlformat lsp-mode jedi elpygen elpy company-jedi)))
