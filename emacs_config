@@ -86,9 +86,8 @@
 ;; rainbow-delimiters mode
 (add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
 
-
-;;;; treesitter, eglot, and corfu
-;; treesitter
+;;;; treesitter, eglot, and corfu                                                                                             
+;; treesitter                                                                                                                
 (use-package treesit
   :ensure nil
   :when (treesit-available-p)
@@ -183,9 +182,12 @@
 (global-set-key (kbd "M-t") 'tab-bar-new-tab)
 (global-set-key (kbd "M-W") 'tab-bar-close-tab)
 
+<<<<<<< HEAD
 ;; company-mode
 ;; (add-hook 'after-init-hook 'global-company-mode)
 
+=======
+>>>>>>> c79fec2143fa3cbe9004a1538b7cccf76889eb5f
 ;; projectile
 (use-package projectile
   :ensure t
@@ -238,5 +240,8 @@
 ;; show buffer list in current window
 (global-set-key (kbd "C-x b") 'buffer-menu)
 (global-set-key (kbd "C-x C-b") 'ivy-switch-buffer)
+<<<<<<< HEAD
 
 ;;;;
+=======
+>>>>>>> c79fec2143fa3cbe9004a1538b7cccf76889eb5f
