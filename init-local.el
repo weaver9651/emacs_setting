@@ -62,6 +62,11 @@
      "Window '%s' is normal")
    (current-buffer)))
 
+;; Even window sizes
+(advice-add 'split-window-horizontally :after (lambda (&rest args) (balance-windows)))
+(advice-add 'delete-window :after (lambda (&rest args) (balance-windows)))
+
+
 ;; show buffer list in current window
 (global-set-key (kbd "C-x b") 'buffer-menu)
 (global-set-key (kbd "C-x C-b") 'ivy-switch-buffer)
@@ -144,6 +149,7 @@
   :config
   (global-set-key [f8] 'neotree-toggle))
 
+
 ;; treesitter
 (use-package treesit
   :ensure nil
@@ -161,6 +167,8 @@
 
 ;; eglot
 (add-hook 'prog-mode-hook 'eglot-ensure)
+(global-set-key [f2] 'eglot-rename)
+
 
 ;;;; ocmal
 ;; tuareg
@@ -199,7 +207,7 @@
   :config
   (setq projectile-completion-system 'ivy)
   :bind (:map projectile-mode-map
-	      ("s-p" . projectile-command-map) ;; for MacOS
+	      ("s-p" . projectile-command-map)   ;; for MacOS
 	      ("C-c p" . projectile-command-map) ;; for Windows/Linux
 	      ))
 
