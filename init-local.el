@@ -225,6 +225,9 @@
 (global-set-key (kbd "M-}") 'tab-bar-switch-to-next-tab)
 (global-set-key (kbd "M-t") 'tab-bar-new-tab)
 (global-set-key (kbd "M-W") 'tab-bar-close-tab)
+(global-set-key (kbd "C-x M-{") 'tab-bar-move-tab-backward)
+(global-set-key (kbd "C-x M-}") 'tab-bar-move-tab)
+(add-hook 'window-setup-hook #'tab-bar-mode) ;; To force tabs appear
 
 ;; corfu
 (use-package corfu
