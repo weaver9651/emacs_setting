@@ -5,6 +5,23 @@
 ;; set el files load path
 (setq load-path (cons (expand-file-name "~/.emacs.d/lisp") load-path))
 
+;; straight.el
+(defvar bootstrap-version)
+(let ((bootstrap-file
+       (expand-file-name
+        "straight/repos/straight.el/bootstrap.el"
+        (or (bound-and-true-p straight-base-dir)
+            user-emacs-directory)))
+      (bootstrap-version 7))
+  (unless (file-exists-p bootstrap-file)
+    (with-current-buffer
+        (url-retrieve-synchronously
+         "https://raw.githubusercontent.com/radian-software/straight.el/develop/install.el"
+         'silent 'inhibit-cookies)
+      (goto-char (point-max))
+      (eval-print-last-sexp)))
+  (load bootstrap-file nil 'nomessage))
+
 ;; redo
 (require 'redo+)
 (global-set-key (kbd "C-x u") 'redo)
@@ -14,7 +31,7 @@
 ;; buffer-navigation, find-file extension
 
 ;; emacs shell mode. previously f8, but now neotree.
-(global-set-key [f1] 'shell)
+(global-set-key (kbd "C-<f1>") 'shell)
 
 ;; show column (row, column) numbers
 (column-number-mode 1)
@@ -227,6 +244,12 @@
 (global-set-key (kbd "M-W") 'tab-bar-close-tab)
 (global-set-key (kbd "C-x M-{") 'tab-bar-move-tab-backward)
 (global-set-key (kbd "C-x M-}") 'tab-bar-move-tab)
+
+;; override compilation keybinding
+(with-eval-after-load 'compile
+  (define-key compilation-mode-map (kbd "M-{") 'tab-bar-switch-to-prev-tab)
+  (define-key compilation-mode-map (kbd "M-}") 'tab-bar-switch-to-next-tab))
+
 (add-hook 'window-setup-hook #'tab-bar-mode) ;; To force tabs appear
 
 ;; corfu
@@ -257,6 +280,24 @@
 ;;  :hook (python-mode . (lambda ()
 ;;                          (require 'lsp-pyright)
 ;;                          (lsp))))
+
+;; copilot
+(when (executable-find "node")
+  (use-package copilot
+    :straight (:host github :repo "copilot-emacs/copilot.el" :files ("*.el"))
+    :ensure t
+    :hook (prog-mode . copilot-mode)
+    :bind (:map copilot-completion-map
+                ("<tab>" . copilot-accept-completion)
+                ("TAB" . copilot-accept-completion)
+                ("C-c C-a" . copilot-accept-completion-by-word))
+    :config
+    (add-to-list 'copilot-indentation-alist '(prog-mode . 2))
+    (add-to-list 'copilot-indentation-alist '(org-mode . 2))
+    (add-to-list 'copilot-indentation-alist '(text-mode . 2))
+    (add-to-list 'copilot-indentation-alist '(closure-mode . 2))
+    (add-to-list 'copilot-indentation-alist '(emacs-lisp-mode . 2))))
+(setq warning-minimum-level :error)
 
 (provide 'init-local)
 
