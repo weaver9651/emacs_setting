@@ -161,11 +161,34 @@
   (ivy-mode))
 
 ;; neotree
-(use-package neotree
-  :ensure t
-  :config
-  (global-set-key [f8] 'neotree-toggle))
+;; (use-package neotree
+;;   :ensure t
+;;   :config
+;;   (global-set-key [f8] 'neotree-toggle))
 
+;;;; treemacs
+(use-package treemacs
+  :ensure t
+  :bind
+  ("<f8>" . treemacs)
+  (:map treemacs-mode-map
+        ("SPC" . treemacs-TAB-action))
+  )
+
+(use-package nerd-icons
+  :ensure t
+  ;; :custom
+  ;; The Nerd Font you want to use in GUI
+  ;; "Symbols Nerd Font Mono" is the default and is recommended
+  ;; but you can use any other Nerd Font if you want
+  ;; (nerd-icons-font-family "Symbols Nerd Font Mono")
+  )
+
+(use-package treemacs-nerd-icons
+  :after (treemacs nerd-icons)
+  :config
+  (treemacs-load-theme "nerd-icons"))
+;;;;
 
 ;; treesitter
 (use-package treesit
@@ -252,17 +275,11 @@
 
 (add-hook 'window-setup-hook #'tab-bar-mode) ;; To force tabs appear
 
-;; corfu
-(use-package corfu
-  :ensure t
-  :init
-  (global-corfu-mode))
-
-;; company
-;;(use-package company
-;;  :ensure t
-;;  :init
-;;  (global-company-mode))
+;; corfu ;; included in Purcell emacs
+;; (use-package corfu
+;;   :ensure t
+;;   :init
+;;   (global-corfu-mode))
 
 ;; magit
 (use-package magit
@@ -271,15 +288,6 @@
 
 ;; highlight git diff
 (diff-hl-margin-mode)
-
-;;;; python
-;; pyright
-;;(use-package lsp-pyright
-;;  :ensure t
-;;  :custom (lsp-pyright-langserver-command "pyright") ;; or basedpyright
-;;  :hook (python-mode . (lambda ()
-;;                          (require 'lsp-pyright)
-;;                          (lsp))))
 
 ;; copilot
 (when (executable-find "node")
@@ -298,6 +306,10 @@
     (add-to-list 'copilot-indentation-alist '(closure-mode . 2))
     (add-to-list 'copilot-indentation-alist '(emacs-lisp-mode . 2))))
 (setq warning-minimum-level :error)
+
+;; suppress automatic popup
+;; (with-eval-after-load 'lsp-mode
+;;   (setq lsp-eldoc-enable-hover nil))
 
 (provide 'init-local)
 
