@@ -198,7 +198,8 @@
   (setq major-mode-remap-alist
 	'((python-mode . python-ts-mode)
 	  (yaml-mode . yaml-ts-mode)
-	  (ocaml-mode . ocaml-ts-mode))))
+	  (ocaml-mode . ocaml-ts-mode)
+          (c++-mode . c++-ts-mode))))
 
 (use-package treesit-auto
   :ensure t
@@ -243,9 +244,10 @@
 (use-package projectile
   :ensure t
   :init
-  (projectile-mode +1)
+  (projectile-mode 1)
   :config
   (setq projectile-completion-system 'ivy)
+  (setq projectile-track-known-projects-automatically nil)
   :bind (:map projectile-mode-map
 	      ("s-p" . projectile-command-map)   ;; for MacOS
 	      ("C-c p" . projectile-command-map) ;; for Windows/Linux
@@ -310,6 +312,10 @@
 ;; suppress automatic popup
 ;; (with-eval-after-load 'lsp-mode
 ;;   (setq lsp-eldoc-enable-hover nil))
+
+
+;; xref
+(global-set-key (kbd "C-x C-r") 'xref-find-references)
 
 (provide 'init-local)
 
